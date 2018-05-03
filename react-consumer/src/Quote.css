@@ -1,0 +1,13 @@
+.quote {
+    position: relative;
+    width: 500px;
+    border: 1px solid lightgrey;
+    float: left;
+    margin: 5px;
+  }
+  
+  .quote-info{
+    text-align: left;
+    padding: 10px;
+  }
+  
