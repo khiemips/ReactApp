@@ -4,7 +4,7 @@ pipeline {
       image 'node'
       args '-u root:sudo'
     }
-    
+
   }
   stages {
     stage('Prepare') {
@@ -18,8 +18,22 @@ pipeline {
       }
     }
     stage('Test') {
+      parallel {
+        stage('Test') {
+          steps {
+            sh 'echo \'testing\''
+          }
+        }
+        stage('Integration test') {
+          steps {
+            sh 'echo(\'integration test\')'
+          }
+        }
+      }
+    }
+    stage('Notify') {
       steps {
-        sh 'echo \'testing\''
+        mail(subject: 'Build notification', body: 'Notification body', to: 'Khiem.NguyenTan@ips-ag.com')
       }
     }
   }
