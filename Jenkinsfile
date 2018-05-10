@@ -18,6 +18,13 @@ pipeline {
         expression { env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'develop' }
       }
       steps {
+        if (env.BRANCH_NAME.equals('master')){
+          GIT_BRANCH = "integration"
+        } else {
+          GIT_BRANCH = "develop"
+        }
+
+
         sh 'npm build'
       }
     }
@@ -27,6 +34,7 @@ pipeline {
       }
       steps {
         echo 'Testing...'
+        echo ${GIT_BRANCH}
       }
     }
   }
@@ -46,4 +54,7 @@ uFab CI/CD"""
         }
     }
   }
+  environment {
+    GIT_BRANCH = "develop"
+    }
 }
