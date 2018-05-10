@@ -18,22 +18,13 @@ pipeline {
       }
     }
     stage('Test') {
-      parallel {
-        stage('Test') {
-          steps {
-            sh 'echo \'testing\''
-          }
-        }
-        stage('Integration test') {
-          steps {
-            sh 'echo(\'integration test\')'
-          }
-        }
+      steps {
+        echo 'Testing...'
       }
     }
     stage('Notify') {
       steps {
-        mail(subject: 'Build notification', body: 'Notification body', to: 'Khiem.NguyenTan@ips-ag.com')
+        echo 'Notifying...'
       }
     }
   }
