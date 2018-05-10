@@ -9,7 +9,6 @@ pipeline {
   stages {
     stage('Prepare') {
       steps {
-        sh 'npm cache clean'
         sh 'npm i'
       }
     }
