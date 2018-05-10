@@ -11,14 +11,23 @@ pipeline {
       steps {
         git url: "https://github.com/khiemips/ReactApp.git", branch: "${env.BRANCH_NAME}", credentialsId: "khiemipsgithub"
         sh 'npm i'
+
+        script {
+          if (env.BRANCH_NAME.equals('master')){
+            GIT_BRANCH = "integration"
+          } else {
+            GIT_BRANCH = "develop"
+          }
+        }
       }
     }
     stage('Build') {
       when {
         expression { env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'develop' }
       }
-      steps {
+      steps {   
         sh 'npm build'
+        echo "${GIT_BRANCH}"
       }
     }
     stage('Test') {
@@ -27,6 +36,7 @@ pipeline {
       }
       steps {
         echo 'Testing...'
+        echo "${GIT_BRANCH}"
       }
     }
   }
@@ -46,4 +56,7 @@ uFab CI/CD"""
         }
     }
   }
+  environment {
+    GIT_BRANCH = "develop"
+    }
 }
