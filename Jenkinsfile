@@ -25,7 +25,7 @@ pipeline {
     stage('Notify') {
       steps {
         mail to: 'Khiem.NguyenTan@ips-ag.com',
-             subject: """[uFabBuild][manual] ${currentBuild.currentResult}: ${currentBuild.fullDisplayName}""",
+             subject: """[uFab-CI-manual] ${currentBuild.currentResult}: ${currentBuild.fullDisplayName}""",
              body: """
 Hi team, 
              
@@ -34,7 +34,7 @@ The CI pipeline '${currentBuild.fullDisplayName}' is ${currentBuild.currentResul
 Please visit ${env.BUILD_URL} for details.
              
 Regards,
-Jenkins"""
+uFab CI/CD"""
       }
     }
   }
