@@ -23,6 +23,8 @@ pipeline {
           APP_TAG = "${APP_NAME}-${GIT_BRANCH}".toLowerCase().replaceAll("/", "-")
           ACR_IMAGE_URL = "${ACR_LOGINSERVER}/${APP_TAG}:${BUILD_NUMBER}"
         }
+
+        echo "${GIT_BRANCH} - ${AKS_NAMESPACE}"
       }
     }
     stage('Build') {
