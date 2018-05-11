@@ -24,7 +24,7 @@ pipeline {
           ACR_IMAGE_URL = "${ACR_LOGINSERVER}/${APP_TAG}:${BUILD_NUMBER}"
         }
 
-        echo "${GIT_BRANCH} - ${AKS_NAMESPACE}"
+        echo "IPS Branch: ${GIT_BRANCH} - AKS Namespace: ${AKS_NAMESPACE} - Tag: ${APP_TAG} - Url: ${ACR_IMAGE_URL}"
       }
     }
     stage('Build') {
@@ -33,7 +33,7 @@ pipeline {
       }
       steps {   
         sh 'npm build'
-        echo "${GIT_BRANCH} - ${AKS_NAMESPACE}"
+        echo "IPS Branch: ${GIT_BRANCH} - AKS Namespace: ${AKS_NAMESPACE} - Tag: ${APP_TAG} - Url: ${ACR_IMAGE_URL}"
       }
     }
     stage('Test') {
@@ -42,7 +42,7 @@ pipeline {
       }
       steps {
         echo 'Testing...'
-        echo "${GIT_BRANCH} - ${AKS_NAMESPACE}"
+        echo "IPS Branch: ${GIT_BRANCH} - AKS Namespace: ${AKS_NAMESPACE} - Tag: ${APP_TAG} - Url: ${ACR_IMAGE_URL}"
       }
     }
   }
