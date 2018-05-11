@@ -59,6 +59,6 @@ uFab CI/CD"""
   }
   environment {
     GIT_BRANCH = "develop"
-    AKS_NAMESPACE = ${GIT_BRANCH}
+    AKS_NAMESPACE = "${GIT_BRANCH}""
     }
 }
