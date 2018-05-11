@@ -18,6 +18,7 @@ pipeline {
             AKS_NAMESPACE = "test"
           } else if (env.BRANCH_NAME.equals('develop')) {
             GIT_BRANCH = "integration"
+            AKS_NAMESPACE = "integration"
           }
         }
       }
