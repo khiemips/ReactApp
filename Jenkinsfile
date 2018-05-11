@@ -20,7 +20,11 @@ pipeline {
             GIT_BRANCH = "integration"
             AKS_NAMESPACE = "integration"
           }
+          APP_TAG = "${APP_NAME}-${GIT_BRANCH}".toLowerCase().replaceAll("/", "-")
+          ACR_IMAGE_URL = "${ACR_LOGINSERVER}/${APP_TAG}:${BUILD_NUMBER}"
         }
+
+        echo "IPS Branch: ${GIT_BRANCH} - AKS Namespace: ${AKS_NAMESPACE} - Tag: ${APP_TAG} - Url: ${ACR_IMAGE_URL}"
       }
     }
     stage('Build') {
@@ -29,7 +33,7 @@ pipeline {
       }
       steps {   
         sh 'npm build'
-        echo "${GIT_BRANCH} - ${AKS_NAMESPACE}"
+        echo "IPS Branch: ${GIT_BRANCH} - AKS Namespace: ${AKS_NAMESPACE} - Tag: ${APP_TAG} - Url: ${ACR_IMAGE_URL}"
       }
     }
     stage('Test') {
@@ -38,7 +42,7 @@ pipeline {
       }
       steps {
         echo 'Testing...'
-        echo "${GIT_BRANCH} - ${AKS_NAMESPACE}"
+        echo "IPS Branch: ${GIT_BRANCH} - AKS Namespace: ${AKS_NAMESPACE} - Tag: ${APP_TAG} - Url: ${ACR_IMAGE_URL}"
       }
     }
   }
@@ -61,5 +65,9 @@ uFab CI/CD"""
   environment {
     GIT_BRANCH = "develop"
     AKS_NAMESPACE = "${GIT_BRANCH}"
+    APP_TAG = "tag"
+    ACR_IMAGE_URL = "url"
+    APP_NAME = "ReactApp"
+    ACR_LOGINSERVER = "hub.docker.com"
     }
 }
