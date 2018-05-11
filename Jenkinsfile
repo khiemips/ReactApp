@@ -20,6 +20,8 @@ pipeline {
             GIT_BRANCH = "integration"
             AKS_NAMESPACE = "integration"
           }
+          APP_TAG = "${APP_NAME}-${GIT_BRANCH}".toLowerCase().replaceAll("/", "-")
+          ACR_IMAGE_URL = "${ACR_LOGINSERVER}/${APP_TAG}:${BUILD_NUMBER}"
         }
       }
     }
@@ -61,5 +63,9 @@ uFab CI/CD"""
   environment {
     GIT_BRANCH = "develop"
     AKS_NAMESPACE = "${GIT_BRANCH}"
+    APP_TAG = "tag"
+    ACR_IMAGE_URL = "url"
+    APP_NAME = "ReactApp"
+    ACR_LOGINSERVER = "hub.docker.com"
     }
 }
