@@ -14,9 +14,11 @@ pipeline {
 
         script {
           if (env.BRANCH_NAME.equals('master')){
+            GIT_BRANCH = "master"
+            AKS_NAMESPACE = "test"
+          } else if (env.BRANCH_NAME.equals('develop')) {
             GIT_BRANCH = "integration"
-          } else {
-            GIT_BRANCH = "develop"
+            AKS_NAMESPACE = "integration"
           }
         }
       }
@@ -27,7 +29,7 @@ pipeline {
       }
       steps {   
         sh 'npm build'
-        echo "${GIT_BRANCH}"
+        echo "${GIT_BRANCH} - ${AKS_NAMESPACE}"
       }
     }
     stage('Test') {
@@ -36,7 +38,7 @@ pipeline {
       }
       steps {
         echo 'Testing...'
-        echo "${GIT_BRANCH}"
+        echo "${GIT_BRANCH} - ${AKS_NAMESPACE}"
       }
     }
   }
@@ -58,5 +60,6 @@ uFab CI/CD"""
   }
   environment {
     GIT_BRANCH = "develop"
+    AKS_NAMESPACE = "${GIT_BRANCH}"
     }
 }
