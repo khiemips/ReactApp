@@ -19,10 +19,11 @@ pipeline {
     }
   }
   post {
-    failure {
+    always {
       node('master'){
+        // Put your email below for notification of failed builds
         mail to: 'Khiem.NguyenTan@ips-ag.com',
-        subject: """[uFabBuild][FE CI] ${currentBuild.currentResult}: ${currentBuild.fullDisplayName}""",
+        subject: """[uFabBuild][FrontEnd CI] ${currentBuild.currentResult}: ${currentBuild.fullDisplayName}""",
         body: """
 Hi team,
 
