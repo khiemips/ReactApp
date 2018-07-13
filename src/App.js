@@ -6,7 +6,8 @@ import { QuoteService } from './QuoteService';
 
 class App extends Component {
   quotes = new QuoteService().getAllQuotes();
-  
+  // test trigger from frontend  
+
   render() {
     return (
       <div className="App">
